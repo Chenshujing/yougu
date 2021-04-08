@@ -1,0 +1,72 @@
+.login{
+  width: 640px;
+  height: 498px;
+  margin:  0 auto;
+  border: 1px solid red;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.loginLR{
+  width: 640px;
+  height: 498px;
+
+}
+.loginIcon{
+  width: 256px;
+  height: 498px;
+  float: left;
+}
+.loginIcon img{
+  width: 100%;
+}
+.loginInfomation{
+  width: 382px;
+  height: 498px;
+  float: left;
+  position: relative;
+}
+.close{
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 19px;
+  right: 25px;
+}
+.close img{
+  width: 100%;
+}
+
+.btn{
+  width: 304px;
+  height: 32px;
+  position: absolute;
+  left: 40px;
+  bottom: 68px;
+}
+.btnNO{
+  width: 304px;
+  height: 32px;
+  border: none;
+  background: #B9D6FF;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.btnYes{
+  width: 304px;
+  height: 32px;
+  border: none;
+  background: #1677FF;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.jump{
+  font-size: 14px;
+  color: #4086F7;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+}

@@ -1,0 +1,65 @@
+.submit{
+  width: 640px;
+  height: 498px;
+  margin:  0 auto;
+  border: 1px solid red;
+  border-radius: 4px;
+}
+.header{
+width: 640px;
+height: 55px;
+background: #fff;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+border-bottom: 1px solid #EEEEEE;
+}
+.header span{
+line-height: 55px;
+}
+.headerT{
+font-size: 16px;
+margin-left: 24px;
+font-weight: 500;
+}
+.headerC{
+margin-right: 24px;
+}
+.progress{
+width:592px ;
+margin: 0 auto;
+margin-top: 16px;
+}
+.progress img{
+width: 592px;
+}
+.submitBtn{
+  width: 640px;
+  border-top: 1px solid #DDDDDD;
+  height: 63px;
+  margin-top: 32px;
+}
+.canle{
+  width: 64px;
+height: 32px;
+background: #FAFAFA;
+border-radius: 4px;
+border: 1px solid #DDDDDD;
+color: #666666;
+font-size: 14px;
+float: right;
+margin-top: 15px;
+margin-right: 10px;
+}
+.btn{
+  border: none;
+  width: 132px;
+height: 32px;
+background: #4086F7;
+border-radius: 4px;
+color: #FFFFFF;
+font-size: 14px;
+float: right;
+margin-right: 24px;
+margin-top: 15px;
+}
