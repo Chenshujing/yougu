@@ -1,4 +1,4 @@
-body,div,p,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,a,input,button,textarea,select{
+body,div,p,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,a,input,button,textarea,select,img{
     margin: 0;
     padding: 0;
     outline: none;
@@ -7,8 +7,10 @@ body,div,p,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,a,input,button,textarea,select{
     font-family:Avenir,Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
     color: #333333;
     width: 100%;
+    min-width: 960px;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
+    margin: 0 auto;
   }
   a{
     text-decoration: none;
@@ -21,4 +23,8 @@ body,div,p,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,a,input,button,textarea,select{
   }
   input:focus,a:focus{
     outline: none;
+  }
+  img{
+    border: 0;
+    vertical-align: top;
   }
