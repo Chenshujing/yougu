@@ -214,13 +214,13 @@ import Headers from '@/components/header'
     position: relative;
     float: left;
     width: 32%;
-    height: 80px;
+    height: 90px;
     background: #FFFFFF;
     box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.03),-2px -2px 2px 0px rgba(0, 0, 0, 0.03);
     border-radius: 8px;
     /* padding-top: 16px; */
     margin-top: 16px;
-    margin-right: 1.3%;
+    margin-right: 1.1%;
     cursor: pointer;
   }
 }
@@ -259,6 +259,7 @@ import Headers from '@/components/header'
     /* margin-top: 20px; */
     padding-top: 16px;
     padding-bottom: 25px;
+    margin-left: 3px;
   }
 
   .case {
@@ -267,7 +268,7 @@ import Headers from '@/components/header'
 
   .caseShow {
     width: 100%;
-    height: 80px;
+    height: 90px;
     // box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.03),-2px -2px 2px 0px rgba(0, 0, 0, 0.03);
     border-radius: 8px;
     margin: 0 auto;
@@ -282,12 +283,13 @@ import Headers from '@/components/header'
     display: flex;
     flex-direction: row;
     height: 90px;
-    box-sizing: border-box;
-    padding-left: 14px;
+    // box-sizing: border-box;
+    padding-left: 4%;
   }
 
   .caseImg {
-    width:76px;
+    width:30%;
+    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -296,15 +298,14 @@ import Headers from '@/components/header'
   }
 
   .caseImg img {
-    width: 76px;
+    width: 100%;
+    max-height: 90px;
   }
   .qrcodeImg{
     
   }
   .qrcodeImg img{
     width: 70px;
-    position: relative;
-    top: -5px;
   }
 
   .contan {
@@ -359,6 +360,7 @@ import Headers from '@/components/header'
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    width: 64%;
   }
 
   .caseTilt {

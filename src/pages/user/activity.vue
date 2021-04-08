@@ -52,7 +52,7 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        page-size="10"
+        :page-size="10"
         hide-on-single-page="true"
         @current-change="page"
         :total="tatol">
@@ -72,7 +72,7 @@
         orderContent: [],
         show: false,
         src: '',
-        tatol: '',
+        tatol: 0,
         size: 1,
         pages:'',
         loading:false,
@@ -184,6 +184,10 @@
   }
 </script>
 <style lang="scss">
+.pagination{
+  width: 100%;
+  text-align: center;
+}
   .wrapper {
     position: absolute;
     top: 25%;

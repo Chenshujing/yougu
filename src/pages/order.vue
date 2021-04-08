@@ -136,6 +136,8 @@
   .pagination{
     position: absolute;
     bottom: 20px;
+    width: 100%;
+    text-align: center;
   }
 }
 .listmore {
