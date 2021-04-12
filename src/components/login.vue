@@ -223,8 +223,6 @@ export default {
       }
     },
     login() {
-        this.$emit('success',true)
-        return 
         if (!(/^1[3456789]\d{9}$/.test(this.myPhone))) {
           this.errText = '*请输入正确的电话号码'
           return

@@ -1,6 +1,6 @@
 <template>
     <div class="user">
-        <headers></headers>
+        <headers :type="3"></headers>
         <div class="box-container">
             <div class="user_info">
                 <div class="base_infomation">
@@ -9,7 +9,7 @@
             <div class="tab">
                 <el-tabs v-model="activeName" @tab-click="tab(activeName)">
                     <el-tab-pane label="机构专区" name="1">
-                        <organ :bindOrgaList="bindOrgaList" :OrgaData="OrgaData" @Change="ChangeOrga" :UserData="UserData"></organ>
+                        <organ :bindOrgaList="bindOrgaList" :OrgaData="OrgaData" @Change="ChangeOrga" :UserData="UserData" @Info="Info"></organ>
                     </el-tab-pane>
                     <el-tab-pane label="我的活动" name="2">
                         <activity></activity>
@@ -77,6 +77,9 @@ export default {
         },
         truepoput(){
             this.show=false
+        },
+        Info(){
+          this.getUserInfo()
         },
         getUserInfo(){
           return new Promise((resolve,reject)=>{let params = {

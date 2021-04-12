@@ -81,10 +81,19 @@
                 <div class="no_data_detail">绑定机构并认证后可展示机构活动数据</div>
             </div>
         </div> -->
+        <successful v-if="loginStatus" @close="close"  @ident="ident"></successful>
+        <institutions  v-if="Status" @close="close" @identity="identity"></institutions>
+        <identity v-if="identStatus" @close="close" @successBind="successBind"></identity>
+        <authentication v-if="BindStatus"  @close="close"></authentication>
     </div>
 </template>
 <script>
+import successful from '@/components/successful'
+import Institutions from '@/components/institutions'
+import Identity from '@/components/identity'
+import Authentication from '@/components/authentication'
 export default {
+  components:{successful,Identity,Authentication,Institutions},
     props:{
         bindOrgaList:Array,
         OrgaData:Object,
@@ -96,10 +105,35 @@ export default {
             orgaItem:{},
             showPopover: false,
             show: false,
-            arr:['未开通','授权中','已到期']
+            arr:['未开通','授权中','已到期'],
+            loginStatus:false,
+            identStatus:false,
+            BindStatus:false,
+            Status:false,
         }
     },
     methods:{
+      close(){
+            this.show=false
+            this.loginStatus = false
+            this.identStatus = false
+            this.Status = false
+            this.BindStatus = false
+        },
+        ident(type){
+            this.loginStatus = !type
+            this.Status = type
+        },
+        successBind(type){
+            this.identStatus = !type
+            this.BindStatus = type
+            this.$emit('Info')
+        },
+        identity(type){
+            this.Status = !type
+            this.identStatus = type
+            this.$emit('Info')
+        },
         GetOrgaItem(index){
             this.orgaItem = this.bindOrgaList[index]
         },
@@ -115,7 +149,7 @@ export default {
             this.$router.push({path:'/identityAuthentication',query:{id:id}})
         },
         go_bind(){
-            this.$router.push({path:'/InstitutionalBinding'})
+            this.loginStatus = true
         },
         go_myActivity(){
             this.$router.push({path:'/activity'})
@@ -319,6 +353,7 @@ export default {
 }
 .go_bind{
     font-size: 14px;
+    cursor: pointer;
     span{
         width: 16px;
         height: 16px;
