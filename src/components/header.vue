@@ -8,7 +8,7 @@
                 <div class="header_item nav_bar clear_float">
                     <div :class="type==1?'active':''" @click="Go_index()">首页</div>
                     <div :class="type==2?'active1':''" @click="Go_indent()">订购活动</div>
-                    <div :class="type==3?'active1':''">机构数据</div>
+                    <div :class="type==3?'active1':''"  @click="Go_user()">机构数据</div>
                 </div>
                 <div class="header_item header_login" v-if="!isLogin">
                     <div class="login" @click="login">登录<img src="../assets/images/login.png"/></div>
@@ -53,6 +53,9 @@ export default {
         },
         Go_indent(){
             this.$router.push({name:'indent'})
+        },
+        Go_user(){
+          this.$router.push({name:'user'})
         },
         login(){
             this.show=true

@@ -12,8 +12,8 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        page-size="10"
-        hide-on-single-page="true"
+        :page-size="10"
+        :hide-on-single-page="true"
         @current-change="page"
         :total="tatol">
       </el-pagination>
@@ -30,7 +30,7 @@
         a:60,
         orderContent: [],
         active: '',
-        tatol: '',
+        tatol: 0,
         size: 1,
         pages:'',
         loading:false,

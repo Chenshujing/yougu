@@ -53,7 +53,7 @@
         background
         layout="prev, pager, next"
         :page-size="10"
-        hide-on-single-page="true"
+        :hide-on-single-page="true"
         @current-change="page"
         :total="tatol">
       </el-pagination>
