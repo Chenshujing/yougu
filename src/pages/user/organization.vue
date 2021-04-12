@@ -11,7 +11,20 @@
                         <span class="icon"  v-if="orgaItem.isAuth==1"></span>
                         <span class="show_detail" v-if="orgaItem.isAuth==0">机构数据需认证后获取展示</span>
                     </div>
-                    <div class="tab_cart" @click="showPopup"><span></span>切换机构</div>
+                    <div class="tab_cart" @click="showPopup">
+                      <el-dropdown @command="handleCommand">
+                        <div class="el-dropdown-link">
+                          <span></span>
+                          切换机构
+                        </div>
+                        
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item v-for="(item,index) in bindOrgaList" :key="index" :command="item">{{item.orgaName}}</el-dropdown-item>
+  
+                          <el-dropdown-item divided command="0"><span></span>去绑定</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
+                    </div>                   
                 </div>
                 <div class="detail" v-if="bindOrgaList.length>0">
                     <img src="../../assets/images/user/logo.png" />
@@ -113,6 +126,15 @@ export default {
         }
     },
     methods:{
+      handleCommand(command){
+        if(command==0){
+          this.loginStatus = true
+        }else{
+          this.orgaItem = command;
+          this.$emit('Change',command)
+        }
+            console.log("dianji")
+        },
       close(){
             this.show=false
             this.loginStatus = false

@@ -156,6 +156,7 @@ export default {
           })
         },
         ChangeOrga(data){
+          console.log("111")
             this.orgaId = data.orgaId
             this.getOrgaData()
             this.bindOrga()
