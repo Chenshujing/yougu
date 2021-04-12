@@ -14,7 +14,7 @@
                     <div class="login" @click="login">登录<img src="../assets/images/login.png"/></div>
                 </div>
                 <div class="header_item login_user" v-if="isLogin">
-                    <div class="login">用户：{{mobile}}<img src="../assets/images/login.png"/></div>
+                    <div class="login">用户：{{mobile}}<img src="../assets/images/tuichu.png" @click="tuichu"/></div>
                 </div>
             </div>
         </div>
@@ -48,6 +48,11 @@ export default {
         }
     },
     methods:{
+        tuichu(){
+            this.$cookies.remove('sessionId')
+            this.$cookies.remove('mobile')
+            this.$router.go(0)
+        },
         Go_index(){
             this.$router.push({path:'/index'}).catch(()=>{})
         },
@@ -162,6 +167,12 @@ export default {
         .login_user{
            float: right;
            line-height: 80px;
+        }
+        .login_user img{
+            width: 16px;
+            height: 16px;
+            margin-top: 30px;
+            margin-left: 15px;
         }
         // .header_login:hover{
         //     background: #fff;

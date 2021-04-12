@@ -54,6 +54,7 @@
         <maps v-if="map" @MapAddress="MapAddress" @back_map="back_map"></maps>
     </div>
     </div>
+    <user :dialogVisible="userBlow" @close="closeUser"></user>
     </div>
 </template>
 <script>
@@ -64,8 +65,9 @@ import Order from '@/components/order'
 import Serve from '@/components/serve'
 import Step from '@/pages/activity/step'
 import Maps from '@/pages/map.vue'
+import user from '@/components/useragree'
 export default {
-    components:{Headers,Booking,Sliders,Order,Serve,Step,Maps},
+    components:{Headers,Booking,Sliders,Order,Serve,Step,Maps,user},
     computed:{
         AllPrice(){
             return this.activityPrice + this.sPrice
@@ -89,10 +91,14 @@ export default {
             bindOrgaId:0,
             disable:false,
             map:false,
-            orgaAddr:''
+            orgaAddr:'',
+            userBlow:false
         }
     },
     methods:{
+    closeUser(){
+        this.userBlow=false
+    },
     open() {
         this.$alert('<ul class="list_content"><li>活动策划</li><li>活动banner图1张、全屏图1张</li><li>服务器负载均衡</li><li>作品云存储、数据同步</li><li>活动时间设置</li><li>分组别报名</li><li>作品投票</li><li>转发作品增加投票次数</li><li>推荐朗读素材功能</li><li>作品生成留声卡功能</li><li>限制参赛地区功能</li><li>参赛码验证参赛人员</li><li>生成活动宣传海报功能</li><li>海量资源库使用</li><li>制作符合活动主题的朗读素材</li><li>活动作品审核</li><li>提供活动数据及作品下载</li></ul>', '活动包含服务',{
             dangerouslyUseHTMLString: true,
@@ -251,7 +257,8 @@ export default {
             this.map = false
         },
         Go_protocol(){
-            this.$router.push({path:'/protocol'})
+            // this.$router.push({path:'/protocol'})
+            this.userBlow=true
         }
     },
     mounted(){
@@ -354,7 +361,7 @@ export default {
 .consent{
     padding:0 24px;
     height: 60px;
-    background: #FAFAFA;
+    background: #fff;
     line-height: 60px;
     font-size: 21px;
     // position: fixed;

@@ -427,6 +427,7 @@ export default {
           }).then(res=>{
             if(res.data.result==true){
               this.$cookies.set('sessionId',res.data.data.sessionId,60 * 60 * 24)
+              this.$router.go(0)
               if(res.data.data.isNewUser==1){
                 this.$emit('success',true)
               }else{
