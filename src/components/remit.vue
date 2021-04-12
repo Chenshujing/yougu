@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="查看汇款信息" :visible.sync="outerVisible" width="640px">
+    <el-dialog title="查看汇款信息" :visible.sync="outerVisible" width="640px" :before-close="handleClose">
         <div class="inputFrom clearfix">
              <div class="submitInformation submitInformation2">
                 <p class="title">付款凭证</p>
@@ -64,6 +64,9 @@ export default {
             this.dialogImageUrl = item
             this.dialogVisible = true
             
+        },
+        handleClose(done){
+          this.$emit('close')
         }
     },
     mounted(){
@@ -76,6 +79,7 @@ export default {
     text-align:left;
     float: left;
     width: 60%;
+    margin-bottom: 32px;
     .title{
         width: 128px;
         font-size: 14px;

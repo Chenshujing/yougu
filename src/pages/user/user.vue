@@ -12,10 +12,10 @@
                         <organ :bindOrgaList="bindOrgaList" :OrgaData="OrgaData" @Change="ChangeOrga" :UserData="UserData" @Info="Info"></organ>
                     </el-tab-pane>
                     <el-tab-pane label="我的活动" name="2">
-                        <activity></activity>
+                        <activity v-if="ac_Status"></activity>
                     </el-tab-pane>
                     <el-tab-pane label="活动订单" name="3">
-                        <order></order>
+                        <order v-if="order_status"></order>
                     </el-tab-pane>
                 </el-tabs>
             </div>
@@ -40,7 +40,9 @@ export default {
             UserData:{},
             orgaId:'',
             show:false,
-            activeName:'1'
+            activeName:'1',
+            ac_Status:false,
+            order_status:false
         }
     },
     // beforeRouteEnter (to, from, next) {
@@ -65,6 +67,14 @@ export default {
                   }
                   
                 })
+                this.ac_Status = false
+                this.order_status = false
+            }else if(index==2){
+                this.ac_Status = true
+                this.order_status = false
+            }else{
+              this.order_status = true
+              this.ac_Status = false
             }
         },
         out_info(){

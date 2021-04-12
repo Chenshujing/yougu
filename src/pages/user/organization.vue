@@ -133,7 +133,6 @@ export default {
           this.orgaItem = command;
           this.$emit('Change',command)
         }
-            console.log("dianji")
         },
       close(){
             this.show=false
@@ -145,11 +144,12 @@ export default {
         ident(type){
             this.loginStatus = !type
             this.Status = type
+            this.$emit('Info')
         },
         successBind(type){
             this.identStatus = !type
             this.BindStatus = type
-            this.$emit('Info')
+            
         },
         identity(type){
             this.Status = !type
@@ -168,7 +168,8 @@ export default {
             this.show = false
         },
         bindOrga(id){
-            this.$router.push({path:'/identityAuthentication',query:{id:id}})
+            this.identStatus = true
+            this.$cookies.set('orgaId',id)
         },
         go_bind(){
             this.loginStatus = true
