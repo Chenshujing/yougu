@@ -3,10 +3,14 @@
   <el-dialog
   title="提交汇款信息"
   :visible.sync="dialogVisible"
-  :before-close="handleClose">
+  :before-close="handleClose"
+  width="680px">
   <div class="submit">
     <div class="progress">
       <img src="../assets/images/information/status1.png" alt="">
+      <p class="texta">确定订单信息</p>
+      <p class="textb">输入汇款信息</p>
+      <p class="textc">提交成功</p>
     </div>
     <div class="TitleS">
       <p>基本信息</p>
@@ -86,7 +90,7 @@ export default {
 .TitleS{
   width: 592px;
   margin:  0 auto;
-  margin-top: 24px;
+  margin-top: 50px;
 }
 .TitleS p{
   font-size: 14px;
@@ -148,6 +152,31 @@ export default {
   margin-left: 3px;
   margin-top: 2px;
   color: #999999;
+}
+.progress{
+    width: 570px;
+    position: relative;
+}
+.progress img{
+    width: 570px;
+}
+.progress p{
+    font-size: 16px;
+}
+.texta{
+position: absolute;
+bottom: -26px;
+left: -29px;
+}
+.textb{
+position: absolute;
+bottom: -26px;
+left: 237px;
+}
+.textc{
+position: absolute;
+bottom: -26px;
+right: -10px;
 }
 
 </style>

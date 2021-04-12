@@ -1,5 +1,5 @@
 <template>
-    <div class="pay">
+    <div class="pay" ref="pay">
         <headers :title="title"></headers>
         <div class="box-container">
         <div class="booking_wrapper">     
@@ -158,6 +158,7 @@ export default {
             // this.$router.push({
             //     path:`/detail/${this.$route.params.id}`
             // })
+            window.scrollTo(0,0)
             this.show = true
         },
         copyCode(){
@@ -309,6 +310,7 @@ export default {
             overflow: hidden;
             font-size: 14px;
             line-height: 20px;
+            border-bottom: 1px solid #eee;
             li{
                 float: left;
                 padding: 0 32px 0 0;
@@ -328,7 +330,7 @@ export default {
         }
     }
     .border_list{
-        border-top: 1px solid #eee;
+        
     }
     .all_price{
       height: 300px;

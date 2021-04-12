@@ -1,11 +1,17 @@
 <template>
     <el-dialog title="查看汇款信息" :visible.sync="outerVisible" width="640px">
         <div class="inputFrom clearfix">
+             <div class="submitInformation submitInformation2">
+                <p class="title">付款凭证</p>
+                <div class="content">
+                    <img :src="item" v-for="(item,index) in list.voucherImgs" :key="index" @click="showPic(item)"/>
+                </div>
+            </div>
             <div class="submitInformation">
                 <p class="title">付款银行户名</p>
                 <p class="content">{{list.accountName}}</p>
             </div>
-            <div class="submitInformation ">
+            <div class="submitInformation submitInformation1">
                 <p class="title title1">付款日期</p>
                 <p class="content">{{list.payTime}}</p>
             </div>
@@ -13,7 +19,7 @@
                 <p class="title">付款银行账号</p>
                 <p class="content">{{list.account}}</p>
             </div>
-            <div class="submitInformation">
+            <div class="submitInformation submitInformation1">
                 <p class="title title1">联系手机</p>
                 <p class="content">{{list.phoneNumber}}</p>
             </div>
@@ -22,6 +28,9 @@
                 <p class="content">{{list.remark}}</p>
             </div>
         </div>
+        <el-dialog :visible.sync="dialogVisible" append-to-body width="400px">
+            <img :src="dialogImageUrl" alt="" width="100%">
+        </el-dialog>
     </el-dialog>
 </template>
 <script>
@@ -29,7 +38,9 @@ export default {
     props:{outerVisible:Boolean,orderNo:String},
     data(){
         return {
-            list:{}
+            list:{},
+            dialogVisible:false,
+            dialogImageUrl:''
         }
     },
     methods:{
@@ -48,6 +59,11 @@ export default {
                 }
             })
       
+        },
+        showPic(item){
+            this.dialogImageUrl = item
+            this.dialogVisible = true
+            
         }
     },
     mounted(){
@@ -57,9 +73,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .submitInformation{
-    margin-top: 8px;
     text-align:left;
     float: left;
+    width: 60%;
     .title{
         width: 128px;
         font-size: 14px;
@@ -76,6 +92,23 @@ export default {
         padding-left: 12px;
         float: left;
         line-height: 32px;
+        color: #333333;
+        img{
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
     }
   }
+.submitInformation1{
+    width: 40%;
+}
+.submitInformation2{
+    height: 60px;
+    line-height: 60px;
+    .title{
+        line-height: 60px;
+    }
+}
 </style>
