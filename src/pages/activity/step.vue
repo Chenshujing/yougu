@@ -4,7 +4,7 @@
           <div class="step_solid">
             <div class="step_solid_content" :class="type != 1?'step_solid_active':''"></div>
             <div class="step_solid_content step_short_content" :class="type==3?'step_short_content_active':'' || type==4?'step_short_content_error':'' || type==5?'step_success':''"></div>
-            <div class="step_solid_content step_short_content" :class="type==5?'step_success':''"></div>
+            <div class="step_solid_content step_short_content step_short_content_type" :class="type==5?'step_success':''"></div>
           </div>
           <div class="step_1" v-if="type==1">
             <div class="icon icon_1"></div>
@@ -82,7 +82,10 @@ export default {
         background: #EEEEEE;
       }
       .step_short_content{
-        width:25%;
+        width:34%;
+      }
+      .step_short_content_type{
+        width: 16%;
       }
       .step_solid_active{
         background: #4086F7;
@@ -150,7 +153,7 @@ export default {
         position: absolute;
         left:50%;
         margin-left:-26px;
-        top:-16px;
+        top:-12px;
       }
       .icon_1{
         background: url('../../assets/images/wancheng.png') no-repeat;
@@ -169,7 +172,7 @@ export default {
         position: absolute;
         right: 25%;
         margin-right: -26px;
-        top: -26px;
+        top: -14px;
       }
     }
     .step_4{
@@ -326,7 +329,7 @@ export default {
     line-height: 34px;
     padding-right: 10px;
     .pay_order{
-      padding-left: 10px;
+      padding-right: 10px;
     }
 }
 .no_pass{

@@ -196,6 +196,7 @@
             </div>
             <footers></footers>
         </div>
+        
     </div>
 </template>
 <script>

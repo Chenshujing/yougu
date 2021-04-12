@@ -1,8 +1,7 @@
 .submit{
   width: 640px;
-  height: 498px;
   margin:  0 auto;
-  border: 1px solid red;
+  background: #fff;
   border-radius: 4px;
 }
 .header{
@@ -24,11 +23,11 @@ font-weight: 500;
 }
 .headerC{
 margin-right: 24px;
+cursor: pointer;
 }
 .progress{
 width:592px ;
 margin: 0 auto;
-margin-top: 16px;
 }
 .progress img{
 width: 592px;
@@ -48,8 +47,9 @@ border: 1px solid #DDDDDD;
 color: #666666;
 font-size: 14px;
 float: right;
-margin-top: 15px;
+margin-top: 10px;
 margin-right: 10px;
+cursor: pointer;
 }
 .btn{
   border: none;
@@ -61,5 +61,6 @@ color: #FFFFFF;
 font-size: 14px;
 float: right;
 margin-right: 24px;
-margin-top: 15px;
+margin-top: 10px;
+cursor: pointer;
 }

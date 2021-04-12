@@ -13,3 +13,26 @@
     width: 1110px;
     margin: 0 auto;
 }
+.message_wrapper{
+    width: 100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+.pop_wrapper{
+    position: fixed;
+    top: 50%;
+    margin-top: -250px;
+    left: 50%;
+    margin-left: -321px;   
+}
+.clearfix:after{
+    content: "";
+    display: block;
+    height: 0;
+    clear:both;
+    visibility: hidden;
+}

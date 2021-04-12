@@ -73,27 +73,49 @@
         <footers :title="title" :step="1" @go_pay="go_pay"></footers>
         </div>
         </div>
+        <payForm :dataList="orderList" @close="close" :dialogVisible="show" @next="next"></payForm>
+        <payorder :outerVisible="pay" @successful="successful" :orderNo="orderNo"></payorder>
+        <submitsuccess :dialogVisible="success"></submitsuccess>
     </div>
 </template>
 <script>
 import Headers from '@/components/header'
 import Footers from '@/pages/activity/bottom'
 import Step from '@/pages/activity/step'
+import PayForm from '@/components/submit'
+import Payorder from '@/components/submitInfo'
+import Submitsuccess from '@/components/SubmitSuccess'
 export default {
     name:'pay',
-    components:{Headers,Footers,Step},
+    components:{Headers,Footers,Step,PayForm,Payorder,Submitsuccess},
     data(){
         return {
             title:'支付订单',
             data:'',
             orderList:{},
-            radio:'1'
+            radio:'1',
+            show:false,
+            pay:false,
+            success:false,
+            orderNo:''
         }
     },
     mounted(){
+        this.orderNo = this.$route.params.id
         this.queryOrder()
     },
     methods:{
+        close(){
+            this.show=false
+        },
+        next(){
+            this.show=false
+            this.pay = true
+        },
+        successful(){
+            this.pay = false
+            this.success = true
+        },
         queryOrder(){
             let params = {
                 "data": {
@@ -133,10 +155,10 @@ export default {
             }
         },
         go_pay(){
-            this.$router.push({
-                path:`/detail/${this.$route.params.id}`
-            })
-            
+            // this.$router.push({
+            //     path:`/detail/${this.$route.params.id}`
+            // })
+            this.show = true
         },
         copyCode(){
             this.$toast('复制成功')

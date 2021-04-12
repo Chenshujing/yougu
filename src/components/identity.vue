@@ -1,12 +1,14 @@
 <template>
   <div>
+    <div class="message_wrapper">
+            <div class="pop_wrapper">
     <div class="login">
       <div class="loginLR">
         <div class="loginIcon">
           <img src="./../assets//images/login/loginLeft.png" alt="" />
         </div>
         <div class="loginInfomation">
-          <div class="close">
+          <div class="close"  @click="close">
             <img src="./../assets/images/login/colse.png" alt="">
           </div>
           <div class="successTitle">
@@ -26,13 +28,15 @@
             <p>已入驻机构均有机构账号，若遗忘可<a href="https://kef.m.iyougu.com/api/mobileweb/home?channel_id=10351&channel_key=10351oirg&wechatapp_id=198360&key=33790wo28">联系客服</a>找回</p>
           </div>
           <div class="btn">
-            <button :class="next?'btnYes':'btnNO'" v-bind:disabled="next">进行绑定</button>
+            <button :class="next?'btnNO':'btnYes'" v-bind:disabled="next" @click="nextTop">进行绑定</button>
           </div>
-          <div class="jump">
+          <div class="jump" @click="close">
             <p>暂时跳过  ></p>
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   </div>
 </template>
@@ -40,25 +44,32 @@
   export default{
     data() {
       return {
-        next:false,
+        next:true,
         search: '',
       }
     },
     methods: {
+      close(){
+        this.$emit('close')
+      },
       nextTop(){
         this.axios.post('/api/v1/login/authOrga', {
           "data": {
             "orgaAccount": this.search,
-            "orgaId": this.$route.query.id,
+            "orgaId": this.$cookies.get('orgaId')
           },
           "sessionId": this.$cookies.get('sessionId')
         }).then(res => {
             if(res.data.code == 400001){
-              this.$toast(res.data.message)
+              // this.$toast(res.data.message)
+              this.$message.error(res.data.message);
+              this.$emit('successBind',true)
             }else if(res.data.code = 200000){
-              this.$router.push({path:'/CertificationSuccess'})
+              // this.$router.push({path:'/CertificationSuccess'})
+              this.$emit('successBind',true)
             }else{
-              this.$toast(res.data.message)
+              this.$message.error(res.data.message);
+              
             }
         },error=>{
           if(error.response.data.message=='缓存用户信息不存在'){
@@ -69,9 +80,9 @@
       },
       textIdentity(event){
         if(event.currentTarget.value!=''){
-          this.next=true
+          this.next=false
         }else{
-          this.next = false
+          this.next = true
         }
       }
     }

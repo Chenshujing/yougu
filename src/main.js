@@ -6,7 +6,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
-import {Tabs,TabPane,Alert,MessageBox,Select,Option,Icon,CheckboxGroup,Checkbox,Radio,RadioGroup,Pagination,Timeline,TimelineItem} from 'element-ui'
+import {Tabs,TabPane,Alert,MessageBox,Select,Option,Icon,CheckboxGroup,Checkbox,Radio,RadioGroup,Pagination,Timeline,TimelineItem,Message,Upload,Dialog,Button,DatePicker,Steps,Step} from 'element-ui'
 import './assets/css/reset.css'
 import './assets/css/comment.css'
 Vue.config.productionTip = false
@@ -24,8 +24,15 @@ Vue.use(RadioGroup)
 Vue.use(Pagination)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
-Vue.prototype.$msgbox = MessageBox;
-Vue.prototype.$alert = MessageBox.alert;
+Vue.use(Upload)
+Vue.use(Dialog)
+Vue.use(Button)
+Vue.use(DatePicker)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$message = Message
 /* eslint-disable no-new */
 
 axios.defaults.baseURL = '/api'

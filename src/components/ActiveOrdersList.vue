@@ -161,6 +161,7 @@
     border-radius: 4px;
     margin-bottom: 24px;
     float: left;
+    margin-right: 1%;
   .contents {
     padding: 0 16px;
     

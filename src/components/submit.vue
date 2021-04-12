@@ -1,9 +1,10 @@
 <template>
+<div>
+  <el-dialog
+  title="提交汇款信息"
+  :visible.sync="dialogVisible"
+  :before-close="handleClose">
   <div class="submit">
-    <div class="header">
-      <span class="headerT">提交汇款信息</span>
-      <span class="headerC">x</span>
-    </div>
     <div class="progress">
       <img src="../assets/images/information/status1.png" alt="">
     </div>
@@ -14,15 +15,15 @@
       <ul class="clearfix">
         <li>
           <span class="infoA">当前绑定机构</span>
-          <span class="infoB">当前绑定机构</span>
+          <span class="infoB">{{dataList.orgaName}}</span>
         </li>
         <li style="position:relative;">
           <span class="infoA">对公转账</span>
-          <span class="money"><span class="biao">￥</span>28,860.00</span>
+          <span class="money"><span class="biao">￥</span>{{dataList.amount}}</span>
         </li>
         <li>
           <span class="infoA">订单编号</span>
-          <span class="infoB">202103111122330320</span>
+          <span class="infoB">{{dataList.orderNo}}</span>
         </li>
       </ul>
     </div>
@@ -51,13 +52,35 @@
         </li>
       </ul>
     </div>
-    <div class="submitBtn">
-      <button class="btn">提交汇款信息</button>
-      <button class="canle">取 消</button>
-    </div>
+  </div>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="close">取 消</el-button>
+    <el-button type="primary" @click="comfirm">提交汇款信息</el-button>
+  </span>
+  </el-dialog>
   </div>
 </template>
-
+<script>
+export default {
+  // data(){
+  //   return {
+  //     dialogVisible:false
+  //   }
+  // },
+  props:{dataList:Object,dialogVisible:Boolean},
+  methods:{
+    close(){
+      this.$emit('close')
+    },
+    handleClose(done){
+      this.$emit('close')
+    },
+    comfirm(){
+      this.$emit('next')
+    }
+  }
+}
+</script>
 <style scoped>
   @import url(../assets/css/submit.css);
 .TitleS{
@@ -100,7 +123,7 @@
   color: #FE4600;
   font-size: 24px;
   position: absolute;
-  top: -10px;
+  top: -6px;
 }
 .biao{
   font-size: 14px;

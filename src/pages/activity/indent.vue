@@ -96,7 +96,8 @@ export default {
     open() {
         this.$alert('<ul class="list_content"><li>活动策划</li><li>活动banner图1张、全屏图1张</li><li>服务器负载均衡</li><li>作品云存储、数据同步</li><li>活动时间设置</li><li>分组别报名</li><li>作品投票</li><li>转发作品增加投票次数</li><li>推荐朗读素材功能</li><li>作品生成留声卡功能</li><li>限制参赛地区功能</li><li>参赛码验证参赛人员</li><li>生成活动宣传海报功能</li><li>海量资源库使用</li><li>制作符合活动主题的朗读素材</li><li>活动作品审核</li><li>提供活动数据及作品下载</li></ul>', '活动包含服务',{
             dangerouslyUseHTMLString: true,
-            showConfirmButton:false
+            showConfirmButton:true,
+            center: true
         });
       },
       ChooseAgress(event){
@@ -158,7 +159,7 @@ export default {
                 return
             }
             if(!this.checked){
-              this.$toast('请先同意活动服务协议')
+              this.$message('请先同意活动服务协议')
               this.getValue = false
               return
             }
@@ -190,7 +191,7 @@ export default {
                   return
               }
               if(!this.checked){
-                this.$toast('请先同意活动服务协议')
+                this.$message('请先同意活动服务协议')
                 return
               }
               this.createOrder()
@@ -293,14 +294,13 @@ export default {
 }
 .bind{
     .title{
-        font-size: 28px;
-        line-height: 40px;
+        font-size: 16px;
+        line-height: 22px;
         color: #999;
     }
     .about{
-        font-size: 34px;
+        font-size: 24px;
         line-height: 48px;
-        margin-top: 8px;
         font-weight: 800;
     }
 }
@@ -326,6 +326,7 @@ export default {
                 img{
                     width: 16px;
                     height: 16px;
+                    vertical-align: revert;
                 }
             }
         }
@@ -365,6 +366,9 @@ export default {
         top: 4px;
         margin-left: 6px;
         color: #666;
+        img{
+            vertical-align: unset;
+        }
     }
     .agress{
         color: #999;

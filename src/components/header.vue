@@ -10,26 +10,112 @@
                     <div :class="type==2?'active1':''" @click="Go_indent()">订购活动</div>
                     <div :class="type==3?'active1':''">机构数据</div>
                 </div>
-                <div class="header_item header_login">
-                    <div class="login">登录<img src="../assets/images/login.png"/></div>
+                <div class="header_item header_login" v-if="!isLogin">
+                    <div class="login" @click="login">登录<img src="../assets/images/login.png"/></div>
+                </div>
+                <div class="header_item login_user" v-if="isLogin">
+                    <div class="login">用户：{{mobile}}<img src="../assets/images/login.png"/></div>
                 </div>
             </div>
         </div>
-    </div>
+        
+                <login v-if="show" @close="close" @success="success" @olderUser="olderUser"></login>
+                <successful v-if="loginStatus" @close="close"  @ident="ident"></successful>
+                <institutions  v-if="Status" @close="close" @identity="identity"></institutions>
+                <identity v-if="identStatus" @close="close" @successBind="successBind"></identity>
+                <authentication v-if="BindStatus"  @close="close"></authentication>
+            </div>
+
 </template>
 <script>
+import Login from '@/components/login'
+import successful from '@/components/successful'
+import Institutions from '@/components/institutions'
+import Identity from '@/components/identity'
+import Authentication from '@/components/authentication'
 export default {
     name:'headers',
     props:{type:Number},
+    components:{Login,successful,Identity,Authentication,Institutions},
+    data(){
+        return {
+            show:false,
+            loginStatus:false,
+            identStatus:false,
+            BindStatus:false,
+            Status:false,
+            isLogin:false
+        }
+    },
     methods:{
         Go_index(){
             this.$router.push({path:'/index'}).catch(()=>{})
         },
         Go_indent(){
             this.$router.push({name:'indent'})
+        },
+        login(){
+            this.show=true
+        },
+        close(){
+            this.show=false
+            this.loginStatus = false
+            this.identStatus = false
+            this.Status = false
+            this.BindStatus = false
+        },
+        success(type){
+            this.loginStatus = type
+            this.show = !type
+        },
+        olderUser(type){
+            this.show = type
+        },
+        ident(type){
+            this.loginStatus = !type
+            this.Status = type
+        },
+        successBind(type){
+            this.identStatus = !type
+            this.BindStatus = type
+        },
+        identity(type){
+            this.Status = !type
+            this.identStatus = type
+        },
+        userInfo(){
+            let params = {
+                "sessionId": this.$cookies.get('sessionId'),
+            }
+            this.axios.post('/api/v1/user/getUserInfo',params).then(res=>{
+                if(res.data.code=="200000"){
+                    this.$cookies.set('mobile',res.data.data.mobile,60 * 60 * 24)
+                    this.mobile = res.data.data.mobile
+                    this.isLogin = true             
+                }
+
+            },error=>{
+                if(error.response.data.message=='缓存用户信息不存在'){
+                    this.$cookies.remove("sessionId")
+                    this.isLogin = false
+                    this.$router.push({path:'/login'})
+                }
+            })
+        },
+        isLoginStatus(){
+            if(this.$cookies.get('sessionId')!=null && this.$cookies.get('mobile')==null){
+                this.userInfo()
+            }else if(this.$cookies.get('sessionId')!=null && this.$cookies.get('mobile')!=null){
+                this.mobile = this.$cookies.get('mobile')
+                this.isLogin = true 
+            }else{
+                this.isLogin = false
+            }
         }
-    }
-        
+    },
+    mounted(){
+        this.isLoginStatus()
+    }   
     
 }
 </script>
@@ -66,14 +152,18 @@ export default {
             cursor: pointer;
             img{
                 position: relative;
-                top: 2px;
+                top: 7px;
                 left: 5px;
             }
         }
-        .header_login:hover{
-            background: #fff;
-            color: #4086F7;
+        .login_user{
+           float: right;
+           line-height: 80px;
         }
+        // .header_login:hover{
+        //     background: #fff;
+        //     color: #4086F7;
+        // }
         .nav_bar{
             margin-left: 44%;
             line-height: 80px;

@@ -1,12 +1,14 @@
 <template>
   <div>
+    <div class="message_wrapper">
+            <div class="pop_wrapper">
     <div class="login">
       <div class="loginLR">
         <div class="loginIcon">
           <img src="./../assets//images/login/loginLeft.png" alt="" />
         </div>
         <div class="loginInfomation">
-          <div class="close">
+          <div class="close" @click="close">
             <img src="./../assets/images/login/colse.png" alt="">
           </div>
           <div class="successTitle">
@@ -33,13 +35,15 @@
             <p>仅可选择已购买开通优谷朗读产品服务机构（如购买过活动套餐/优谷朗读亭/留声墙/小舞台等），若有疑问请<br/><a>联系客服</a></p>
           </div>
           <div class="btn">
-            <button :class="dataFrom?'btnYes':'btnNO'" v-bind:disabled="dataFrom">进行绑定</button>
+            <button :class="dataFrom?'btnNO':'btnYes'" v-bind:disabled="dataFrom" @click="nextGo">进行绑定</button>
           </div>
-          <div class="jump">
+          <div class="jump" @click="close">
             <p>暂时跳过  ></p>
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   </div>
 </template>
@@ -47,7 +51,7 @@
   export default{
     data() {
       return {
-        dataFrom:false,
+        dataFrom:true,
         chooseBlock: false,
         NONETEXT: false,
         search: '',
@@ -60,7 +64,7 @@
         this.search = event.currentTarget.innerText
         this.chooseBlock = false
         this.orgaId = id
-        this.dataFrom=true
+        this.dataFrom=false
         if (this.orgaId != '' && this.search != null) {
           this.btnClick = true
         } else {
@@ -72,10 +76,11 @@
           this.chooseBlock = true
         } else {
           this.chooseBlock = false
+          this.orgaId = ''
         }
         // this.orgaId = ''
         this.btnClick = false
-        this.dataFrom=false
+        this.dataFrom=true
         this.axios.post('/api/v1/login/searchOrgaInfos', {
           data: {
             pageNum: 1,
@@ -100,6 +105,26 @@
           }
       })
       },
+      nextGo(){
+        this.axios.post('/api/v1/login/bindOrga', {
+          "data": {
+            "orgaId": this.orgaId
+          },
+          "sessionId": this.$cookies.get('sessionId')
+        }).then(res=>{
+          this.$cookies.set('orgaId',this.orgaId,60 * 60 * 24)
+          // this.$router.push({path:"/success",query:{id:this.orgaId}})
+          this.$emit('ident',true)
+        },error=>{
+          if(error.response.data.message=='缓存用户信息不存在'){
+              this.$cookies.remove("sessionId")
+              this.$router.push({path:'/login'})
+          }
+      })
+      },
+      close(){
+      this.$emit('close')
+    },
     },
     watch:{
       search(newVal,ordVal){
@@ -115,7 +140,7 @@
         },
         orgaId:function(newVal,ordVal){
           console.log(this.orgaId)
-          if(this.orgaId.length>0){
+          if(this.orgaId != ''){
             this.dataFrom=false
           }else{
             this.dataFrom=true
@@ -199,12 +224,13 @@ color: #333333;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
   }
   .showChoose li{
     text-align: left;
     font-size: 14px;
     line-height: 24px;
     text-indent: 1em;
-   
+    cursor: pointer;
   }
 </style>

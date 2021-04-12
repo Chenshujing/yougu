@@ -1,12 +1,14 @@
 <template>
   <div>
+    <div class="message_wrapper">
+            <div class="pop_wrapper">
     <div class="login">
       <div class="loginLR">
         <div class="loginIcon">
           <img src="./../assets//images/login/loginLeft.png" alt="" />
         </div>
         <div class="loginInfomation">
-          <div class="close">
+          <div class="close" @click="close">
             <img src="./../assets/images/login/colse.png" alt="">
           </div>
           <div class="phone">
@@ -30,11 +32,13 @@
             <img :src="select?yesBtn:noBtn" alt="" @click="me" />
             <span>登录既代表同意<a>用户协议和隐私政策</a></span>
           </div>
-          <div class="btn">
-            <button  :class="dataFrom?'btnYes':'btnNO'" v-bind:disabled="dataFrom">登&nbsp;&nbsp;陆</button>
+          <div class="btn" >
+            <button  :class="dataFrom?'btnNO':'btnYes'" v-bind:disabled="dataFrom" @click="login">登&nbsp;&nbsp;录</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
     </div>
   </div>
 </template>
@@ -51,14 +55,14 @@ export default {
       noBtn:require("../assets/images/login/no.png"),
       yesBtn:require('../assets/images/login/yes.png'),
       myPhone:'',
-      dataFrom:false,
+      dataFrom:true,
       myCode:'',
       codeBtn: '发送验证码',
       codeBtnStatus: false,
       errText:'',
       dbClick:true,
       miao:false,
-      err:false
+      err:false,
     }
   },
   watch:{
@@ -71,44 +75,48 @@ export default {
     }
   },
   methods: {
-    // closese(){
-      // alert('ok')
-      // console.log('okok');
-      // this.$message({
-      //   message: '获取验证码太频繁，请稍后重试',
-      //   type: 'warning'
-      // })
-    // },
+    close(){
+      this.$emit('close')
+    },
     me(){
        
       this.select=!this.select;
-      if (this.myPhone.length >= 11 && this.myCode.length >= 4 && this.select==true) {
-        this.dataFrom = true
-      } else {
-        this.dataFrom = false
-      }
+      // if (this.myPhone.length >= 11 && this.myCode.length >= 4 && this.select==true) {
+      //   this.dataFrom = false
+      // } else {
+      //   this.dataFrom = true
+      // }
       // this.$emit('clickMe',this.select)
+      this.errText = ''
     },
     phoneNum(event){
       this.myPhone = event.currentTarget.value
-      if (this.myPhone.length >= 11 && this.myCode.length >= 4 && this.select==true) {
-        this.dataFrom = true
-      } else {
+      if (this.myPhone.length >= 11 && this.myCode.length >= 4) {
         this.dataFrom = false
+      } else {
+        this.dataFrom = true
       }
     },
     searchCode(event) {
       this.myCode = event.currentTarget.value
-      if (this.myPhone.length >= 11 && this.myCode.length >= 4 && this.select==true) {
-        this.dataFrom = true
-      } else {
+      if (this.myPhone.length >= 11 && this.myCode.length >= 4) {
         this.dataFrom = false
+      } else {
+        this.dataFrom = true
       }
     },
     login() {
+        this.$emit('success',true)
+        return 
         if (!(/^1[3456789]\d{9}$/.test(this.myPhone))) {
           this.errText = '*请输入正确的电话号码'
-          return false;
+          return
+        }else if(this.myCode.length < 4){
+          this.errText = '*请输入正确的验证码'
+          return
+        }else if(this.select==false){
+          this.errText = '*请先同意用户协议和隐私政策'
+          return
         }else{
           if(!this.dbClick){
             return
@@ -123,10 +131,11 @@ export default {
             if(res.data.result==true){
               this.$cookies.set('sessionId',res.data.data.sessionId,60 * 60 * 24)
               if(res.data.data.isNewUser==1){
-                this.$router.push({name:'InstitutionalBinding'})
+                this.$emit('success',true)
               }else{
-                this.$router.push({path:'/index'})
+                this.$emit('olderUser',false)
               }
+              
             }else if(res.data.result==false){
               this.errText='*'+res.data.message
             }
@@ -203,7 +212,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   @import url(./../assets/css/login.css);
   .phone{
     width: 304px;
@@ -276,6 +285,12 @@ export default {
     margin-top: 12px;
     margin-left: 16px;
   }
+  .code{
+    button{
+      cursor: pointer;
+    }
+    
+  }
   .code .miao{
     border: none;
     background: #fff;
@@ -290,6 +305,7 @@ export default {
     position: absolute;
     bottom: 103px;
     left: 40px;
+    cursor: pointer;
   }
   .Select img{
     width: 16px;
@@ -331,6 +347,7 @@ export default {
     color: #fff;
     border-radius: 4px;
     font-size: 14px;
+    cursor: pointer;
   }
   .errer{
     position: absolute;
