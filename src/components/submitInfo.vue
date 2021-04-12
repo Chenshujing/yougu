@@ -422,7 +422,7 @@ export default {
 .liftinputFrom{
   width: 308px;
   position: absolute;
-  top: 72px;
+  top: 80px;
   right: 0px;
 }
 .input_error_tip{

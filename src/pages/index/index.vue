@@ -2,7 +2,7 @@
     <div class="index_container">      
         <div class="">
             <div class="header_position">
-                <headers :type="1"></headers>
+                <headers :type="1" :Index="isLogin" @ChangeLogin="ChangeLogin"></headers>
             </div>       
             <div class="banner">
                 <!-- <img src="../../assets/images/index/banner.png" class="banner_images"/> -->
@@ -218,7 +218,8 @@ export default {
             tabList:[],
             banner_List:[],
             activeName:'17',
-            loop:17
+            loop:17,
+            isLogin:false
         }
     },
     methods:{
@@ -307,13 +308,21 @@ export default {
             })
         },
         go_activity(){
+          if(this.$cookies.get('sessionId') != null){
             this.$router.push({name:'indent'})
+          }else{
+            this.isLogin = true
+          }
+            
         },
         NoMore(){
             this.getActivityServices()
         },
         more_case(){
             this.$router.push({name:'CustomerCase'})
+        },
+        ChangeLogin(){
+          this.isLogin  = false
         }
     },
     mounted(){
@@ -382,7 +391,7 @@ export default {
                 margin-bottom: 40px;
                 span{
                     background: url('../../assets/images/index/bg.png') no-repeat;
-                    background-size: cover;
+                    background-size: 100% 100%;
                     font-size: 24px;
                     display: inline-block;
                     width: 138px;
@@ -475,6 +484,10 @@ export default {
     margin-bottom: 60px;
     font-size:32px;
     font-weight: 800;
+    /* background: url('../../assets/images/index/title.png');
+    background-size: 100% 100%; */
+    width: 420px;
+    margin: 0 auto 60px auto;
 }
 .activity_title{
     font-size: 22px;
@@ -536,7 +549,7 @@ export default {
     margin: 0 auto 65px;
 }
 .activity_step{
-    padding: 30px 0;
+    padding: 60px 0;
     .activity_title{
         margin-bottom: 30px;
     }
@@ -591,6 +604,7 @@ export default {
                     font-size: 16px;
                     line-height: 22px;
                     color: #666666;
+                    padding-right: 6px;
                 }
             }
         }
@@ -621,7 +635,6 @@ export default {
     }
     .castom_bg{
         width: 89%;
-        height: 530px;
         margin: 0 auto;
         img{
             width: 100%;

@@ -291,6 +291,10 @@ export default {
 .agress_box{
     padding: 0 17%;
     overflow: hidden;
+    background: #FAFAFA;
+}
+.protocol{
+  background:#FAFAFA;
 }
 .agress_choose{
     float: left;
@@ -333,7 +337,7 @@ export default {
                 img{
                     width: 16px;
                     height: 16px;
-                    vertical-align: revert;
+                    vertical-align: baseline;
                 }
             }
         }
@@ -374,7 +378,7 @@ export default {
         margin-left: 6px;
         color: #666;
         img{
-            vertical-align: unset;
+            vertical-align: baseline;
         }
     }
     .agress{

@@ -1,6 +1,6 @@
 <template>
     <div class="viewpager">
-        <swiper :options="swiperOption" ref="mySwiper">
+        <swiper :options="swiperOption1" ref="mySwiper1">
             <swiper-slide v-for="(item,index) in banner_List" :key="index" >
                 <img :src="item.images" class="banner-image"/>
                 <div class="detail">
@@ -12,8 +12,8 @@
                 </div>
             </swiper-slide>
         </swiper>
-        <div class="swiper-button-prev"></div><!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-        <div class="swiper-button-next"></div><!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->    
+        <div class="swiper-button-prev prev"></div><!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
+        <div class="swiper-button-next next"></div><!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->    
     </div>
 </template>
 <script>
@@ -32,7 +32,7 @@ export default {
         return {       
             List:{},
             flag:false,
-            swiperOption: {
+            swiperOption1: {
                 loop: false,
                 // centeredSlides:true,
                 slidesPerView: 'auto',
@@ -40,8 +40,8 @@ export default {
                 // centeredSlides: true,
                 // centeredSlidesBounds: true,
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: '.swiper-button-next.next',
+                    prevEl: '.swiper-button-prev.prev',
                 },
                 observer:true,
                 observeParents:true,
@@ -58,14 +58,14 @@ export default {
             }
         }
     },
-    computed: { swiper() { return this.$refs.mySwiper.swiper; } },
+    computed: { swiper() { return this.$refs.mySwiper1.swiper; } },
     methods:{
         ShowPop(item){
             this.List = item
             this.flag = !this.flag
         },
         a(){
-            this.$refs.mySwiper.swiper
+            this.$refs.mySwiper1.swiper
         }
     }
 }

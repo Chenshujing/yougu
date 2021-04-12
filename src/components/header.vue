@@ -35,7 +35,7 @@ import Identity from '@/components/identity'
 import Authentication from '@/components/authentication'
 export default {
     name:'headers',
-    props:{type:Number},
+    props:{type:Number,Index:Boolean},
     components:{Login,successful,Identity,Authentication,Institutions},
     data(){
         return {
@@ -57,10 +57,27 @@ export default {
             this.$router.push({path:'/index'}).catch(()=>{})
         },
         Go_indent(){
+          if(this.type==1){
+            if(this.$cookies.get('sessionId') !=null){
+              this.$router.push({name:'indent'})
+            }else{
+              this.show = true
+            }
+          }else{
             this.$router.push({name:'indent'})
+          }           
         },
         Go_user(){
-          this.$router.push({name:'user'})
+          if(this.type==1){
+            if(this.$cookies.get('sessionId') !=null){
+              this.$router.push({name:'user'})
+            }else{
+              this.show = true
+            }
+          }else{
+            this.$router.push({name:'user'})
+          }           
+          
         },
         login(){
             this.show=true
@@ -71,10 +88,12 @@ export default {
             this.identStatus = false
             this.Status = false
             this.BindStatus = false
+            this.$emit('ChangeLogin')
         },
         success(type){
             this.loginStatus = type
             this.show = !type
+            this.userInfo()
         },
         olderUser(type){
             this.show = type
@@ -123,8 +142,14 @@ export default {
     },
     mounted(){
         this.isLoginStatus()
-    }   
-    
+    },   
+    watch:{
+      Index(newVal,ordVal){
+        if(newVal){
+          this.show = true
+        }
+      }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -173,6 +198,7 @@ export default {
             height: 16px;
             margin-top: 30px;
             margin-left: 15px;
+            cursor: pointer;
         }
         // .header_login:hover{
         //     background: #fff;

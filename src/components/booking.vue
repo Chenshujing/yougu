@@ -62,7 +62,7 @@
 
     .booking_item {
       padding:24px 15px;
-      width: 230px;
+      width: 32%;
       height: 150px;
       background: #FAFAFA;
       // display: flex;

@@ -79,7 +79,7 @@ export default {
     },
 }
 </script>
-<style>
+<style lang="scss" scoped>
   .protocol{
     padding: 10px;
     background: #fff;

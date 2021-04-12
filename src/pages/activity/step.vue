@@ -42,29 +42,88 @@
             <div class="error"></div>
             <div class="error_detail">
                 <div class="error_title">
-                    <div>核实不通过原因</div>
+                    
                     <div class="error_word">核实不通过</div>
                 </div>
-                <div class="error_r">{{remark}}</div>
+                <div class="error_r">
+                  <div>核实不通过原因</div>
+                  <P>{{remark}}</P>
+                </div>
                 <div class="godetail" @click="record">重新提交凭证 > </div>
             </div>
         </div>
+        <div class="pass" v-if="type==5">
+          <div class="title">核实通过</div>
+          <div class="tip">添加专属活动运营微信进行活动落地实行</div>
+          <div class="wx_number">
+            <img src="../../assets/images/wchat.png">
+            <span class="">{{wx}}</span>
+          </div>
+        </div>
+        <payorder :outerVisible="pay"  @close="close" @successful="successful" :orderNo="orderNo"></payorder>
+        <submitsuccess :dialogVisible="success" @close="close"></submitsuccess>
     </div>
 </template>
 <script>
+import Payorder from '@/components/submitInfo'
+import Submitsuccess from '@/components/SubmitSuccess'
 export default {
     props:{
         type:Number, // type = 1 选择服务 2 订单支付 3 核实中 4 失败 5 跟进服务,
         remark:String
     },
+    components:{Payorder,Submitsuccess},
+    data(){
+      return {
+        pay:false,
+        success:false,
+        orderNo:'',
+        wx:'yougulangduting001',
+      }
+    },
     methods:{
+      close(){
+          this.pay = false
+          this.success = false
+        },
+        successful(){
+            this.pay = false
+            this.success = true
+        },
         record(){
-            this.$emit('records')
+            this.pay = true
         }
-    }
+    },
+    mounted() {
+      this.orderNo = this.$route.params.id
+    },
 }
 </script>
 <style lang="scss" scoped>
+.pass{
+  width:475px;
+  height: 187px;
+  background: url('../../assets/images/pass.png');
+  background-size: cover;
+  margin: 0 auto;
+  .title{
+    font-size: 18px;
+    padding:20px 0;
+    text-align:center;
+    font-weight:600;
+  }
+  .tip{
+    font-size: 16px;
+    padding-left: 38px;
+    margin-bottom: 27px;
+  }
+  .wx_number{
+    padding-left: 38px;
+    img{
+      margin-right: 10px;
+    }
+  }
+}
 .step{
     display: flex;
     flex-direction: row;
@@ -200,11 +259,11 @@ export default {
       .icon_1{
         background: url('../../assets/images/wancheng.png') no-repeat;
         background-size: cover;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         position: absolute;
-        left: 16px;
-        top: -18px;
+        left: 20px;
+        top: -14px;
       }
       .icon_2{
         background: url('../../assets/images/wancheng.png') no-repeat;
@@ -214,7 +273,7 @@ export default {
         position: absolute;
         left: 50%;
         margin-left: -26px;
-        top: -22px;
+        top: -16px;
       }
       .icon_3{
         background: url('../../assets/images/ing.png') no-repeat;
@@ -222,9 +281,8 @@ export default {
         width: 30px;
         height: 30px;
         position: absolute;
-        right: 14px;
-        
-        top: -22px;
+        right: 24px;       
+        top: -16px;
       }
     }
     .step1{
@@ -334,56 +392,55 @@ export default {
 }
 .no_pass{
     position: relative;
-    min-height: 330px;
+    min-height: 180px;
     margin-bottom: 80px;
+    width: 480px;
+    margin: 0 auto;
     .error{
         background: url('../../assets/images/nopass.png');
-        background-size: cover;
-        width: 710px;
-        height: 20px;
+        background-size: 100% 100%;
+        width: 475px;
+        height: 12px;
         position: absolute;
         left: -26px;
     }     
     .error_detail{
         background: #fff;
-        width: 610px;
-        height: 324px;
+        width: 370px;
+        height: 180px;
         padding:0 30px;
-        border-bottom-left-radius: 32px;
-        border-bottom-right-radius: 32px;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
         position: absolute;
-        top: 10px;
+        top: 6px;
         left:-6px ;
         z-index: 2;
         box-shadow: 12px 12px 12px #eee;
         .error_title{
-            font-size: 34px;
-            line-height: 48px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            margin: 20px 0 8px 0;
+            font-size: 18px;
+            line-height: 48px;           
             .error_word{
                 color: #FE4600;
+                text-align:center;
             }
         }
         .error_r{
             background: #F9F9F9;
-            padding: 20px 20px 14px 20px;
-            font-size:28px;
-            line-height: 40px;
-            height: 126px;
+            padding: 6px 20px 0 20px;
+            font-size:14px;
+            line-height: 28px;
+            height: 80px;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3;
             overflow: hidden;
         }
         .godetail{
-            font-size: 34px;
+            font-size: 16px;
             line-height: 48px;
-            padding: 20px 0;
             color: #4086F7;
             text-align: right;
+            cursor: pointer;
         }
     }
 }

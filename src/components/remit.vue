@@ -28,7 +28,7 @@
                 <p class="content">{{list.remark}}</p>
             </div>
         </div>
-        <el-dialog :visible.sync="dialogVisible" append-to-body width="400px">
+        <el-dialog :visible.sync="dialogVisible" append-to-body width="500px">
             <img :src="dialogImageUrl" alt="" width="100%">
         </el-dialog>
     </el-dialog>
@@ -47,7 +47,7 @@ export default {
         queryVoucher(){
             this.axios.post('/api/v1/order/queryVoucher', {
                 "data": {
-                    "orderNo":this.orderNo
+                    "orderNo":this.$route.params.id
                 },
                 "sessionId": this.$cookies.get('sessionId')
             }).then(res=>{

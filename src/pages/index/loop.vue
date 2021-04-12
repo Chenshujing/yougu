@@ -1,7 +1,7 @@
 <template>
     <div class="viewpager">
         <swiper :options="swiperOption" ref="mySwiper">
-            <swiper-slide v-for="(item,index) in banner_List" :key="index" :style="{'background-color': color}" >
+            <swiper-slide v-for="(item,index) in banner_List" :key="index" :style="{'background-color': item.themeColor}" >
               <div class="banner_loop" >
                 <img :src="item.images" class="banner-image"/>
                 <img src="../../assets/images/guang.png" class="banner_bg"/>
@@ -15,8 +15,8 @@
               </div>
             </swiper-slide>
         </swiper>
-       <div class="swiper-button-prev"></div><!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-        <div class="swiper-button-next"></div><!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->     
+       <div class="swiper-button-prev prev1"></div><!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
+        <div class="swiper-button-next next1"></div><!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->     
     </div>
 </template>
 <script>
@@ -54,8 +54,8 @@ export default {
                 initialSlide:2,
                 preventClicksPropagation : true,
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: '.swiper-button-next.next1',
+                    prevEl: '.swiper-button-prev.prev1',
                 },
                 on:{
                   slideChangeTransitionStart:function(){

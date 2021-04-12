@@ -146,7 +146,7 @@ color: #333333;
   width: 304px;
   position: absolute;
   left: 40px;
-  bottom: 209px;
+  bottom: 180px;
 }
 .Customer p{
   font-size: 12px;

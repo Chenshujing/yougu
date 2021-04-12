@@ -39,7 +39,7 @@
         <div class="order_title order_title_no">已选择服务总览</div>
         <div class="about_serve">       
             <div class="service_about">
-                <div class="serve_all">{{orderList.activityType}}+增值服务（{{orderList.services.length}}）</div>             
+                <div class="serve_all">{{orderList.activityType}}+增值服务（{{length}}）</div>             
             <div class="ac_serve" > 
                 
                 <div v-show="this.orderList.activityType != null">
@@ -99,7 +99,8 @@ export default {
             arr:['待支付','核实中','核实不通过','已支付'],
             remark:'',
             outerVisible:false,
-            orderNo:''
+            orderNo:'',
+            length:0
         }
     },
     methods:{
@@ -115,6 +116,7 @@ export default {
                 if(res.data.code=="200000"){
                   res.data.data.amount = this.returnFloat(res.data.data.amount)
                     this.orderList = res.data.data
+                    this.length = this.orderList.services.length
                     this.step = res.data.data.orderStatus+1
                     this.data = res.data.data.orderNo
                     if(res.data.data.orderStatus==3){
