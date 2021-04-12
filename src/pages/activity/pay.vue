@@ -74,8 +74,8 @@
         </div>
         </div>
         <payForm :dataList="orderList" @close="close" :dialogVisible="show" @next="next"></payForm>
-        <payorder :outerVisible="pay" @successful="successful" :orderNo="orderNo"></payorder>
-        <submitsuccess :dialogVisible="success"></submitsuccess>
+        <payorder :outerVisible="pay"  @close="close" @successful="successful" :orderNo="orderNo"></payorder>
+        <submitsuccess :dialogVisible="success" @close="close"></submitsuccess>
     </div>
 </template>
 <script>
@@ -107,6 +107,8 @@ export default {
     methods:{
         close(){
             this.show=false
+            this.pay = false
+            this.success = false
         },
         next(){
             this.show=false

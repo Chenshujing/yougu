@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog title="提交汇款信息" :visible.sync="dialogVisible" width="680px">
+        <el-dialog title="提交汇款信息" :visible.sync="dialogVisible" width="680px" :before-close="handleClose">
             <div class="step">
                 <div class="progress">
                     <img src="../assets/images/information/status3.png" alt="">
@@ -29,6 +29,9 @@ export default {
         }
     },
     methods:{
+      handleClose(done){
+        this.$emit('close')
+      },
         comfirm(){
             this.$router.push({name:'user'})
         }

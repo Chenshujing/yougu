@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-dialog title="提交汇款信息" :visible.sync="outerVisible" width="680px">
+  <el-dialog title="提交汇款信息" :visible.sync="outerVisible" width="680px" :before-close="handleClose">
   <div class="submit">
     <!-- <div class="header">
       <span class="headerT">提交汇款信息</span>
@@ -103,7 +103,7 @@
     </div> -->
   </div>
   <div slot="footer" class="dialog-footer">
-      <el-button @click="outerVisible = false">取 消</el-button>
+      <el-button @click="handleClose">取 消</el-button>
       <el-button type="primary" @click="submitVoucher">提交汇款信息</el-button>
     </div>
   <el-dialog :visible.sync="dialogVisible" append-to-body>
@@ -135,6 +135,9 @@ export default {
     }
   },
   methods: {
+    handleClose(done){
+      this.$emit('close')
+    },
     onSuccess(response, file, fileList){
       // this.fileList.push({'url':response.data})
       this.imgList = []
@@ -260,7 +263,7 @@ export default {
     color: #999;
 }
   .SubmitImg{
-    margin-top: 8px;
+    margin-top: 48px;
     text-align:left;
     margin-left: 24px;
     overflow: hidden;

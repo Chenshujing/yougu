@@ -79,7 +79,7 @@
         </div>
     </div>
     </div>
-    <remit :outerVisible="outerVisible" :orderNo="orderNo"></remit>
+    <remit :outerVisible="outerVisible" :orderNo="orderNo" @close="close"></remit>
     </div>
 </template>
 <script>
@@ -128,6 +128,9 @@ export default {
                     this.$router.push({path:'/login'})
                 }
             })
+        },
+        close(){
+          this.outerVisible = false
         },
         look_pay(){
             // this.$router.push({path:'/remittanceInformation',query:{id:this.orderList.orderNo}})
