@@ -145,7 +145,7 @@
                     <div class="title">活动案例</div>
                     <el-tabs v-model="activeName" @tab-click="onClick">
                         <el-tab-pane  v-for="(item,index) in tabList" :key="index" :label="item.typeName" :name="(item.typeId).toString()">
-                            <loop :banner_List="banner_List"></loop>
+                            <loop :banner_List="banner_List" v-if="loop==item.typeId"></loop>
                         </el-tab-pane>
                     </el-tabs>
                 </div>
@@ -217,7 +217,8 @@ export default {
             getServices:[],
             tabList:[],
             banner_List:[],
-            activeName:'17'
+            activeName:'17',
+            loop:17
         }
     },
     methods:{
@@ -265,6 +266,7 @@ export default {
         },
         onClick(tab, event) {
             this.activeName = tab.name
+            this.loop = tab.name
             this.pageNum = 1
             this.pageAll = 0
             this.banner_List = []

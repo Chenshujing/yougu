@@ -7,9 +7,9 @@
                 <img src="../../assets/images/guang.png" class="banner_bg"/>
                 <p class="orgaName">{{item.orgaName}}</p>
                 <p class="activityName">{{item.activityName}}</p>
-                <div class="let_more" @click="let_more(index)" v-if="!show">了解更多</div>
-                <p class="activityName" v-show="type==index">需使用微信扫码/识别查看活动</p>
-                <div class="qrcode" v-show="show">
+                <div class="let_more" @click="let_more(index)" v-if="!show && type==index">了解更多</div>
+                <p class="activityName" v-if="show && type==index">需使用微信扫码/识别查看活动</p>
+                <div class="qrcode" v-if="show && type==index">
                   <img :src="item.qrcodeUrl"/>
                 </div>     
               </div>
@@ -39,7 +39,7 @@ export default {
             clickIndex:1,
             Status:1,
             qr:[],
-            type:-1,
+            type:2,
             show:false,
             swiperOption: {
                 loop: false,
@@ -58,12 +58,16 @@ export default {
                     prevEl: '.swiper-button-prev',
                 },
                 on:{
-                    
+                  slideChangeTransitionStart:function(){
+                    self.type = this.activeIndex
+                    self.show = false
+                     
+                    },
                     reachEnd:function(){
                         self.$emit('NoMore')
                     },
                     init:function(){
-                      // alert(this.activeIndex)
+                     
                     }
                 },
             }
@@ -90,7 +94,11 @@ export default {
         },
         let_more(index){
           this.type = index
+          this.show = true
         }
+    },
+    mounted() {
+     
     },
 }
 </script>
