@@ -1,12 +1,13 @@
 <template>
     <div>
-        <el-dialog title="提交汇款信息" :visible.sync="dialogVisible">
+        <el-dialog title="提交汇款信息" :visible.sync="dialogVisible" width="680px">
             <div class="step">
-                <el-steps :space="200" :active="3" align-center finish-status="success">
-                    <el-step title="确定订单信息"></el-step>
-                    <el-step title="输入汇款信息"></el-step>
-                    <el-step title="提交成功"></el-step>
-                </el-steps>
+                <div class="progress">
+                    <img src="../assets/images/information/status3.png" alt="">
+                    <p class="texta">确定订单信息</p>
+                    <p class="textb">输入汇款信息</p>
+                    <p class="textc">提交成功</p>
+                </div>
             </div>
             <div class="success">
                 <img src="../assets/images/successicon.png"/>
@@ -67,5 +68,30 @@ export default {
 }
 .step{
     margin-left: 36px;
+}
+.progress{
+    width: 570px;
+    position: relative;
+}
+.progress img{
+    width: 570px;
+}
+.progress p{
+    font-size: 16px;
+}
+.texta{
+position: absolute;
+bottom: -26px;
+left: -29px;
+}
+.textb{
+position: absolute;
+bottom: -26px;
+left: 237px;
+}
+.textc{
+position: absolute;
+bottom: -26px;
+right: -10px;
 }
 </style>
