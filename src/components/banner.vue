@@ -98,6 +98,7 @@ export default {
         .qrcode{
             overflow: hidden;
             margin-bottom: 10px;
+            margin-top:10px;
             p{
               font-size: 24px;
               line-height: 60px;

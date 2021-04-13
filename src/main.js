@@ -36,10 +36,11 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
 /* eslint-disable no-new */
 
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = 'https://gesapi.iyougu.com/'
 
 new Vue({
   el: '#app',

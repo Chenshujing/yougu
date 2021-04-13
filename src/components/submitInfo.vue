@@ -56,24 +56,12 @@
         </el-upload>
         </div>
       </div>
-      <div class="submitInformation">
-        <p class="title"><span>*</span>付款银行户名</p>
-        <input class="input" type="text" placeholder="请输入付款银行户名" @input="bank($event)" />
-        <div class="input_error_tip" v-if="this.bankName.length > 50">付款银行户名不能超过50字</div>
-      </div>
-      
-      <div class="submitInformation">
-        <p class="title"><span>*</span>付款银行账号</p>
-        <input class="input" v-model="backUser" type="number" placeholder="请输入付款银行账号" @input="user($event)" />
-        <div class="input_error_tip" v-if="this.backUser.length > 50">付款银行账户不能超过50字</div>
-      </div>
-      <div class="submitInformation">
-        <p class="title"><span>*</span>联系手机</p>
-        <input class="input" v-model="phone" type="number" placeholder="请输入联系手机" @input="myPhone($event)" @blur="checkPhone()"/>
-        <div class="input_error_tip" v-if="phoneStatus && this.phone.length<11">请输入11位的手机号码</div>
-        <div class="input_error_tip" v-if="this.phone.length>11">请输入11位的手机号码</div>
-      </div>
-      <div class="liftinputFrom">
+      <div class="Form_input">
+        <div class="submitInformation">
+          <p class="title"><span>*</span>付款银行户名</p>
+          <input class="input" type="text" placeholder="请输入付款银行户名" @input="bank($event)" />
+          <div class="input_error_tip" v-if="this.bankName.length > 50">付款银行户名不能超过50字</div>
+        </div>
         <div class="submitInformation">
           <p class="title" style="width:80px;">付款日期</p>
           <!-- <input type="text" readonly="readonly" placeholder="请选择付款日期" @click="show = true" :value="date">
@@ -85,15 +73,26 @@
             placeholder="选择日期">
           </el-date-picker>
           </div>
-          
-          <!-- <van-cell title="选择单个日期" :value="date" @click="show = true" /> -->
-          <!-- <van-calendar v-model="show" @confirm="onConfirm" :min-date="minDate" color="#4086F7"/> -->
         </div>
-        
+      </div>
+     
+      <div class="Form_input">
+        <div class="submitInformation">
+          <p class="title"><span>*</span>付款银行账号</p>
+          <input class="input" v-model="backUser" type="number" placeholder="请输入付款银行账号" @input="user($event)" />
+          <div class="input_error_tip" v-if="this.backUser.length > 50">付款银行账户不能超过50字</div>
+        </div>
         <div class="submitInformation">
           <p class="title" style="width:80px;">备注</p>
           <input class="input" v-model="note" type="text" placeholder="请输入备注信息">
         </div>
+      </div>
+    
+      <div class="submitInformation">
+        <p class="title"><span>*</span>联系手机</p>
+        <input class="input" v-model="phone" type="number" placeholder="请输入联系手机" @input="myPhone($event)" @blur="checkPhone()"/>
+        <div class="input_error_tip" v-if="phoneStatus && this.phone.length<11">请输入11位的手机号码</div>
+        <div class="input_error_tip" v-if="this.phone.length>11">请输入11位的手机号码</div>
       </div>
     </div>
     
@@ -104,7 +103,7 @@
   </div>
   <div slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submitVoucher">提交汇款信息</el-button>
+      <el-button type="primary" @click="submitVoucher" :disabled="click">提交汇款信息</el-button>
     </div>
   <el-dialog :visible.sync="dialogVisible" append-to-body>
     <img width="100%" :src="dialogImageUrl" alt="">
@@ -131,7 +130,8 @@ export default {
       dialogImageUrl: '',
       dialogVisible: false,
       disabled: false,
-      imgList:[]
+      imgList:[],
+      click:true
     }
   },
   methods: {
@@ -148,7 +148,7 @@ export default {
       }else{
         this.imgList=[]
       }
-      console.log(this.imgList)
+      this._datelength()
     },
     handleRemove(file,fileList) {
       this.imgList = []
@@ -159,7 +159,7 @@ export default {
       }else{
         this.imgList=[]
       }
-      console.log(this.imgList)
+      this._datelength()
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url
@@ -192,10 +192,17 @@ export default {
       },
       _datelength() {
         // console.log(this.fileList.length)
-        if (this.bankName.length <= 50 && this.backUser.length <= 50 && this.phone.length >= 11 && this.fileList.length != 0) {
+        if (this.bankName.length <= 50 && this.backUser.length <= 50 && this.phone.length >= 11 && this.imgList.length != 0) {
           this.disable = true
         } else {
           this.disable = false
+        }
+        if(this.bankName.length==0 || this.backUser.length==0 || this.phone.length==0 || this.imgList.length ==0){
+          this.click = true
+          console.log("111")
+        }else{
+          this.click = false
+          console.log("2222")
         }
       },
       submitVoucher(){
@@ -204,7 +211,7 @@ export default {
             "account": this.bankName,
             "accountName": this.backUser,
             "orderNo": this.orderNo,
-            "payTime": this.formatDate(this.date),
+            "payTime": this.date == '' ?'':this.formatDate(this.date),
             "phoneNumber": this.phone,
             "remark": this.note,
             "voucherImgs": this.imgList
@@ -412,18 +419,13 @@ export default {
 }
 /deep/ .el-input--prefix .el-input__inner{
   height: 34px;
+  line-height: 34px;
 }
 /deep/ .el-input__icon{
   line-height: 34px;
 }
 .inputFrom{
   position: relative;
-}
-.liftinputFrom{
-  width: 308px;
-  position: absolute;
-  top: 80px;
-  right: 0px;
 }
 .input_error_tip{
   margin-top: 48px;
@@ -455,5 +457,17 @@ bottom: -26px;
 right: -10px;
 }
 /* 123 */
-
+input::-moz-placeholder{/* Mozilla Firefox 19+ */
+color: #cccccc;
+opacity: 1;/*这里之前是没有的，发现问题后才加上去的，解决火狐字体不变的问题*/
+}
+input:-moz-placeholder{
+color: #cccccc;/* Mozilla Firefox 4 to 18 */
+}
+input::-webkit-input-placeholder { /* WebKit browsers */
+color: #cccccc;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+color: #cccccc;
+}
 </style>

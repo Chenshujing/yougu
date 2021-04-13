@@ -304,12 +304,13 @@ export default {
 }
 .chooseName {
     width: 670px;
-    height: 40px;
+    height: 32px;
     position: relative;
   }
 
   .chooseInpt {
-    line-height: 40px;
+    line-height: 30px;
+    height: 30px;
     width: 376px;
     border: none;
     border: 1px solid #CCCCCC;
@@ -351,10 +352,10 @@ export default {
     border-top: none;
     height: 300px;
     overflow-y: auto;
-
+    top: 32px;
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.1);
-
-    border-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     box-sizing: border-box;
     padding: 10px 0;
     cursor: pointer;

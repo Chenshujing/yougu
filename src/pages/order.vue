@@ -65,15 +65,12 @@
           "sessionId": this.$cookies.get('sessionId')
         }).then(res => {
           if(res.data.data.records.length==0){
-            this.finished = true
-
+            
           }else{
             this.orderContent = res.data.data.records
             this.tatol = res.data.data.total
             this.pages = res.data.data.pages
             this.size = this.size+1
-            this.loading=false
-            this.finished = false
           }
           this.Once = true
 
@@ -98,7 +95,7 @@
           this.loading = false
           this.pages=''
           this.size = 1
-          this.tatol = ''
+          this.tatol = 0
           this.getOrder()
        }
     },

@@ -531,6 +531,7 @@ export default {
     font-size: 14px;
     border: none;
     line-height: 24px;
+    height: 24px;
     border-bottom: 1px solid #EEEEEE;
   }
   .phone .errPhone{
@@ -566,6 +567,7 @@ export default {
     font-size: 14px;
     border: none;
     line-height: 24px;
+    height: 24px;
     float: left;
   }
   .code span{

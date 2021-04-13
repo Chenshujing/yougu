@@ -191,7 +191,8 @@ color: #333333;
 }
 .infomationTitle input{
   width: 304px;
-  line-height: 24px;
+  line-height: 34px;
+  height: 34px;
   border: none;
   border-bottom: 1px solid #CCCCCC;
   margin-top: 10px;
@@ -225,6 +226,8 @@ color: #333333;
     border-bottom-right-radius: 4px;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 10px 0;
+    height: 200px;
+    overflow-y: scroll;
   }
   .showChoose li{
     text-align: left;

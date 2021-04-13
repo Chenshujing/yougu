@@ -43,7 +43,7 @@
         <div class="order_title order_title_no">已选择服务总览</div>
         <div class="about_serve">       
             <div class="service_about">
-                <div class="serve_all">{{orderList.activityType}}+增值服务（2）</div>             
+                <div class="serve_all">{{orderList.activityType}}+增值服务（{{length}}）</div>             
             <div class="ac_serve" > 
                 
                 <div v-show="this.orderList.activityType != null">
@@ -97,7 +97,8 @@ export default {
             show:false,
             pay:false,
             success:false,
-            orderNo:''
+            orderNo:'',
+            length:0
         }
     },
     mounted(){
@@ -130,6 +131,7 @@ export default {
                     res.data.data.amount = this.returnFloat(res.data.data.amount)
                     this.orderList = res.data.data
                     this.data = res.data.data.orderNo
+                    this.length = res.data.data.services.length
                     // this.orderList.amount = returnFloat(this.orderList.amount)
                 }
                 

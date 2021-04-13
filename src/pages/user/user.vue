@@ -174,9 +174,9 @@ export default {
 
     },
     mounted(){
-        if(this.$route.query.id==2){
-          this.flag = false
-          this.getUserInfo()
+        if(this.$route.query.id==3){
+          this.activeName = '3'
+          this.order_status = true
           return
         }
         this.getOrgaLists()

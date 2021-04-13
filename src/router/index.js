@@ -85,9 +85,9 @@ myRouter.beforeEach((to, from, next) => {
     return false
   } else {
     if(to.path=='/user' && from.name=='orderdetail' && to.query.id == undefined){
-      next({path:'/user',query:{id:2}})
+      next({path:'/user',query:{id:3}})
     }else if(to.path=='/user' && from.name=='pay' && to.query.id == undefined){
-      next({path:'/user',query:{id:2}})
+      next({path:'/user',query:{id:3}})
     }else{
       next() 
     }

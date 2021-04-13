@@ -136,7 +136,8 @@ color: #333333;
 }
 .infomationTitle input{
   width: 304px;
-  line-height: 24px;
+  line-height: 34px;
+  height: 34px;
   border: none;
   border-bottom: 1px solid #CCCCCC;
   margin-top: 10px;
@@ -146,7 +147,7 @@ color: #333333;
   width: 304px;
   position: absolute;
   left: 40px;
-  bottom: 180px;
+  bottom: 200px;
 }
 .Customer p{
   font-size: 12px;

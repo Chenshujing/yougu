@@ -89,6 +89,7 @@
 <style lang="scss" scoped>
 .activity_order{
   overflow: hidden;
+  padding-bottom: 60px;
 }
   .morry {
     display: flex;

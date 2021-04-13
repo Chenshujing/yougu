@@ -14,7 +14,7 @@
                     <div class="login" @click="login">登录<img src="../assets/images/login.png"/></div>
                 </div>
                 <div class="header_item login_user" v-if="isLogin">
-                    <div class="login">用户：{{mobile}}<img src="../assets/images/tuichu.png" @click="tuichu"/></div>
+                    <div class="login">用户：{{mobile}}<img src="../assets/images/tuichu.png" @click="exit_login"/></div>
                 </div>
             </div>
         </div>
@@ -24,6 +24,16 @@
                 <institutions  v-if="Status" @close="close" @identity="identity"></institutions>
                 <identity v-if="identStatus" @close="close" @successBind="successBind"></identity>
                 <authentication v-if="BindStatus"  @close="close"></authentication>
+          <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="400px">
+                <span>是否要退出登录？</span>
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="dialogVisible = false">取 消</el-button>
+                  <el-button type="primary" @click="tuichu">确 定</el-button>
+                </span>
+              </el-dialog>
             </div>
 
 </template>
@@ -44,14 +54,19 @@ export default {
             identStatus:false,
             BindStatus:false,
             Status:false,
-            isLogin:false
+            isLogin:false,
+            dialogVisible:false
         }
     },
     methods:{
+      exit_login(){
+        this.dialogVisible = true
+      },
         tuichu(){
             this.$cookies.remove('sessionId')
             this.$cookies.remove('mobile')
             this.$router.go(0)
+            this.dialogVisible = false
         },
         Go_index(){
             this.$router.push({path:'/index'}).catch(()=>{})
@@ -153,6 +168,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+/deep/ .el-message-box--center{
+  width: 450px;
+}
 .container_header{
     width: 100%;
     height: 80px;

@@ -21,7 +21,7 @@
                         <el-dropdown-menu slot="dropdown">
                           <el-dropdown-item v-for="(item,index) in bindOrgaList" :key="index" :command="item">{{item.orgaName}}</el-dropdown-item>
   
-                          <el-dropdown-item divided command="0"><span></span>去绑定</el-dropdown-item>
+                          <el-dropdown-item divided command="0" class="bind"><span></span>去绑定</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                     </div>                   
@@ -374,9 +374,27 @@ export default {
         }
     }
 }
-.go_bind{
+.bind{
     font-size: 14px;
     cursor: pointer;
+    text-align: center;
+    color: #4086F7;
+    span{
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        background:url(../../assets/images/user/bind.png);
+        background-size: cover;
+        position: relative;
+        top: 2px;
+        left: -8px;
+    }
+}
+.go_bind{
+  font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    color: #4086F7;
     span{
         width: 16px;
         height: 16px;

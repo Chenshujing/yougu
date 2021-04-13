@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="map_wrapper">
     <div class="header_pub">
-        <div class="title"><span class="back" @click="back_map()"><van-icon name="arrow-left" size="20" color="#666666"/></span><span>{{title}}</span></div>
+        <div class="title"><span>{{title}}</span></div>
     </div>  
     <iframe id="mapPage" width="100%" height="667px" frameborder=0
     src="https://apis.map.qq.com/tools/locpicker?search=1&type=1&key=XFUBZ-LMD65-VUGII-QKAZL-ZADU5-BTBFU&referer=myapp">
@@ -33,13 +33,17 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.map_wrapper{
+  margin-top: 20px;
+  width: 960px;
+  margin: 30px auto;
+}
 .header_pub{
     padding:26px 0;
     background: #fff;
     .title{
         text-align: center;
-        color:#030303;
-        font-size: 34px;
+        font-size: 24px;
         position: relative;
         .back{
             position: absolute;
